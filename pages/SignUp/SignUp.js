@@ -14,6 +14,7 @@ import { useToast } from "react-native-toast-notifications";
 import React, { useContext, useState } from "react";
 import Button from "../../components/Button";
 import { AuthContext } from "../../store/user-context";
+import { Colors } from "../../constants/Colors";
 
 const Login = ({ navigation }) => {
 	const [isPressed, setIsPressed] = useState(false);
@@ -121,69 +122,58 @@ const Login = ({ navigation }) => {
 		navigation.navigate("Login");
 	};
 	return (
-		<ImageBackground
-			source={require("../../images/background.png")}
-			resizeMode="cover"
-			style={styles.backGroundImage}
-		>
-			<View style={styles.loginContainer}>
-				<View style={styles.imageContainer}>
-					<Image
-						style={styles.image}
-						source={require("../../images/logo.png")}
-					/>
-				</View>
-				<View style={styles.inputContainer}>
-					<TextInput
-						placeholderTextColor="white"
-						style={[styles.input, styles.focusInput]}
-						placeholder="name"
-						onChangeText={(value) => setName(value)}
-						value={name}
-					/>
-				</View>
-
-				<View style={styles.inputContainer}>
-					<TextInput
-						placeholderTextColor="white"
-						style={[styles.input, styles.focusInput]}
-						placeholder="email"
-						textContentType="emailAddress"
-						keyboardType="email-address"
-						onChangeText={(value) => setEmail(value)}
-						value={email}
-					/>
-				</View>
-				<View style={styles.inputContainer}>
-					<TextInput
-						placeholder="password"
-						style={[styles.input, styles.focusInput]}
-						placeholderTextColor="white"
-						secureTextEntry={true}
-						onChangeText={(value) => setPassword(value)}
-						value={password}
-					/>
-				</View>
-				<Button title="Signup" onPress={onPressHandler} />
-				<View style={styles.textContainer}>
-					<View>
-						<Text style={styles.text}>Already have an account?</Text>
-					</View>
-					<TouchableOpacity
-						onPressIn={() => setIsPressed(true)}
-						onPressOut={() => setIsPressed(false)}
-					>
-						<Pressable onPress={signUpPressHandler}>
-							<Text
-								style={[styles.linkText, isPressed && styles.hoverLinkText]}
-							>
-								Login
-							</Text>
-						</Pressable>
-					</TouchableOpacity>
-				</View>
+		<View style={styles.loginContainer}>
+			<View style={styles.imageContainer}>
+				<Image style={styles.image} source={require("../../images/logo.png")} />
 			</View>
-		</ImageBackground>
+			<View style={styles.inputContainer}>
+				<TextInput
+					placeholderTextColor="white"
+					style={[styles.input, styles.focusInput]}
+					placeholder="name"
+					onChangeText={(value) => setName(value)}
+					value={name}
+				/>
+			</View>
+
+			<View style={styles.inputContainer}>
+				<TextInput
+					placeholderTextColor="white"
+					style={[styles.input, styles.focusInput]}
+					placeholder="email"
+					textContentType="emailAddress"
+					keyboardType="email-address"
+					onChangeText={(value) => setEmail(value)}
+					value={email}
+				/>
+			</View>
+			<View style={styles.inputContainer}>
+				<TextInput
+					placeholder="password"
+					style={[styles.input, styles.focusInput]}
+					placeholderTextColor="white"
+					secureTextEntry={true}
+					onChangeText={(value) => setPassword(value)}
+					value={password}
+				/>
+			</View>
+			<Button title="Signup" onPress={onPressHandler} />
+			<View style={styles.textContainer}>
+				<View>
+					<Text style={styles.text}>Already have an account?</Text>
+				</View>
+				<TouchableOpacity
+					onPressIn={() => setIsPressed(true)}
+					onPressOut={() => setIsPressed(false)}
+				>
+					<Pressable onPress={signUpPressHandler}>
+						<Text style={[styles.linkText, isPressed && styles.hoverLinkText]}>
+							Login
+						</Text>
+					</Pressable>
+				</TouchableOpacity>
+			</View>
+		</View>
 	);
 };
 
@@ -195,13 +185,14 @@ const styles = StyleSheet.create({
 		justifyContent: "center",
 		alignItems: "center",
 		padding: 20,
+		backgroundColor: Colors.success,
 	},
 	title: {
 		fontSize: 24,
 		fontWeight: "700",
 		color: "white",
 		borderBottomWidth: 2,
-		borderBottomColor: "green",
+		borderBottomColor: Colors.primary,
 		width: 200,
 		textAlign: "center",
 		padding: 10,
@@ -227,15 +218,17 @@ const styles = StyleSheet.create({
 		justifyContent: "center",
 	},
 	focusInput: {
-		borderColor: "green",
+		borderColor: Colors.primary,
 	},
 	exceptFocus: {
 		borderColor: "white",
 	},
 	imageContainer: {
-		width: 100,
-		height: 100,
+		width: 200,
+		height: 200,
 		margin: 30,
+		backgroundColor: Colors.secondary,
+		borderRadius: 200,
 	},
 	image: {
 		width: "100%",
@@ -255,11 +248,11 @@ const styles = StyleSheet.create({
 		marginHorizontal: 20,
 	},
 	linkText: {
-		color: "green",
+		color: Colors.primary,
 		fontSize: 20,
 	},
 	hoverLinkText: {
-		borderBottomColor: "green",
+		borderBottomColor: Colors.primary,
 		borderBottomWidth: 2,
 	},
 });

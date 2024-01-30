@@ -5,10 +5,10 @@ import Schedule from "../../components/Schedule";
 
 const Route3 = () => {
 	const { data } = useQuery({
-		queryKey: ["schedules"],
+		queryKey: ["schedules", "route3"],
 		queryFn: async () => {
 			const response = await fetch(
-				"https://bus-schedule-server.vercel.app/api/schedule/"
+				"https://bus-schedule-server.vercel.app/api/schedule?route=route3"
 			);
 			const scheduleData = await response.json();
 			return scheduleData;

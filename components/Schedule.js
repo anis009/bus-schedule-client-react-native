@@ -1,7 +1,7 @@
 import { StyleSheet, Text, View } from "react-native";
 import React from "react";
 
-const Schedule = ({ item }) => {
+const Schedule = ({ item, all }) => {
 	const { bus, route, time } = item;
 	// console.log(bus, route, time);
 	return (
@@ -12,7 +12,7 @@ const Schedule = ({ item }) => {
 		>
 			<View style={styles.scheduleContainer}>
 				<Text style={styles.scheduleItem}>{time}</Text>
-				<Text style={styles.scheduleItem}>{route}</Text>
+				{all && <Text style={styles.scheduleItem}>{route}</Text>}
 				<Text style={styles.scheduleItem}>{bus}</Text>
 			</View>
 		</View>
@@ -26,7 +26,7 @@ const styles = StyleSheet.create({
 		width: "100%",
 		height: 60,
 		flexDirection: "row",
-		justifyContent: "center",
+		justifyContent: "space-between",
 		alignItems: "center",
 		padding: 10,
 		backgroundColor: "#30336b",

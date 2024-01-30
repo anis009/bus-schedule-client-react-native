@@ -25,6 +25,7 @@ import Route1 from "./pages/Route1/Route1";
 import Route2 from "./pages/Route2/Route2";
 import Route3 from "./pages/Route3/Route3";
 import { QueryClient, QueryClientProvider } from "react-query";
+import { Colors } from "./constants/Colors";
 
 const Stack = createNativeStackNavigator();
 
@@ -41,8 +42,11 @@ export default function App() {
 				screenOptions={{
 					tabBarActiveTintColor: "blue",
 					tabBarInactiveTintColor: "white",
-					tabBarLabelStyle: { fontSize: 10 },
-					tabBarStyle: { backgroundColor: "#130f40", paddingTop: 20 },
+					tabBarLabelStyle: { fontSize: 16 },
+					tabBarStyle: {
+						backgroundColor: Colors.success,
+						paddingTop: 20,
+					},
 				}}
 				initialRouteName="route3"
 			>
@@ -61,14 +65,18 @@ export default function App() {
 			<Tab.Navigator
 				screenOptions={{
 					headerStyle: {
-						backgroundColor: "#30336b",
+						backgroundColor: Colors.primary,
 					},
 					headerTintColor: "white",
 					headerTitleAlign: "center",
 					tabBarStyle: {
-						backgroundColor: "#30336b",
+						backgroundColor: Colors.primary,
 					},
-					tabBarActiveBackgroundColor: "#130f40",
+					tabBarActiveBackgroundColor: Colors.secondary,
+					tabBarLabelStyle: {
+						color: Colors.success,
+						fontSize: 14,
+					},
 				}}
 			>
 				<Tab.Screen
@@ -108,6 +116,7 @@ export default function App() {
 								tabBarIcon: () => (
 									<AntDesign name="pluscircleo" size={24} color="white" />
 								),
+								headerTitle: "Create Schedule",
 							}}
 							component={CreateSchedule}
 						/>
@@ -144,7 +153,7 @@ export default function App() {
 						<Stack.Navigator
 							screenOptions={{
 								headerStyle: {
-									backgroundColor: "#30336b",
+									backgroundColor: "#711DB0",
 								},
 								headerTintColor: "white",
 								headerTitleAlign: "center",

@@ -20,7 +20,7 @@ const GetSchedule = () => {
 	}, [isFocused]);
 	const renderSchedule = (renderData) => {
 		const { item } = renderData;
-		return <Schedule item={item} />;
+		return <Schedule item={item} all="all" />;
 	};
 
 	return (

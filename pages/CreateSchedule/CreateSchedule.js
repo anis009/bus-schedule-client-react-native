@@ -4,6 +4,8 @@ import { TimePicker } from "react-native-simple-time-picker";
 import SelectDropdown from "react-native-select-dropdown";
 import Button from "../../components/Button";
 import { useToast } from "react-native-toast-notifications";
+import LabelText from "../../components/LabelText";
+import { Colors } from "../../constants/Colors";
 const CreateSchedule = () => {
 	const [hours, setHours] = React.useState(0);
 	const [minutes, setMinutes] = React.useState(0);
@@ -27,9 +29,44 @@ const CreateSchedule = () => {
 
 	const countries = ["route1", "route2", "route3", "Barishal"];
 	const submitButtonHandler = () => {
+		if (!ampm) {
+			Alert.alert("Input error", "Select Am or Pm", [
+				{
+					text: "OK",
+					onPress: () => {
+						console.log("pressed");
+					},
+				},
+			]);
+			return;
+		}
+		if (!hours) {
+			Alert.alert("Input error", "Select Hours", [
+				{
+					text: "OK",
+					onPress: () => {
+						console.log("pressed");
+					},
+				},
+			]);
+			return;
+		}
+		if (!minutes) {
+			Alert.alert("Input error", "Select Minutes", [
+				{
+					text: "OK",
+					onPress: () => {
+						console.log("pressed");
+					},
+				},
+			]);
+			return;
+		}
+
 		const time = `${hours}:${minutes} ${ampm}`;
+
 		if (!time || !route || !bus) {
-			Alert.alert("Input error", "Plese,Fill the all input", [
+			Alert.alert("Input error", "Plese,Fill empty input", [
 				{
 					text: "OK",
 					onPress: () => {
@@ -57,6 +94,11 @@ const CreateSchedule = () => {
 			.then((res) => res.json())
 			.then((data) => {
 				console.log(data);
+				setBus("");
+				setRoute("");
+				setAmpm("");
+				setHours("");
+				setMinutes("");
 				toast.show("Create Schedule successfully", {
 					type: "success",
 					placement: "top",
@@ -72,18 +114,27 @@ const CreateSchedule = () => {
 
 	return (
 		<View style={styles.container}>
+			<LabelText text="Bus Name" />
 			<View style={styles.inputContainer}>
 				<TextInput
 					placeholder="bus1,bus2,bus3"
 					style={[styles.input, styles.focusInput]}
 					placeholderTextColor="white"
+					value={bus}
 					onChangeText={(value) => setBus(value)}
 				/>
 			</View>
+			<LabelText text="Time" />
 			<View
 				style={[
 					styles.inputContainer,
-					{ width: 300, borderWidth: 1, borderColor: "green", margin: 10 },
+					{
+						width: 300,
+						borderWidth: 2,
+						borderRadius: 5,
+						borderColor: Colors.primary,
+						margin: 10,
+					},
 				]}
 			>
 				<TimePicker
@@ -100,21 +151,25 @@ const CreateSchedule = () => {
 					onPointerDownCapture="green"
 				/>
 			</View>
-
+			<LabelText text="Route Name" />
 			<View>
 				<SelectDropdown
 					buttonStyle={{
 						width: 300,
 						margin: "auto",
-						backgroundColor: "green",
+						backgroundColor: Colors.secondary,
+						borderRadius: 5,
 					}}
 					dropdownStyle={{
 						width: 300,
+						backgroundColor: Colors.success,
 					}}
 					buttonTextStyle={{
 						color: "white",
+						backgroundColor: Colors.success,
 					}}
 					data={countries}
+					onChangeSearchInputText={route}
 					onSelect={(selectedItem, index) => {
 						console.log(selectedItem, index);
 						setRoute(selectedItem);
@@ -144,18 +199,30 @@ const styles = StyleSheet.create({
 		justifyContent: "center",
 		alignItems: "center",
 		padding: 20,
-		backgroundColor: "#1B1464",
+		backgroundColor: Colors.success,
 	},
 	title: {
 		fontSize: 24,
 		fontWeight: "700",
 		color: "white",
 		borderBottomWidth: 2,
-		borderBottomColor: "green",
+		borderBottomColor: Colors.primary,
 		width: 200,
 		textAlign: "center",
 		padding: 10,
 		marginVertical: 20,
+	},
+
+	textContainer: {
+		backgroundColor: "#3498db",
+		padding: 15,
+		borderRadius: 5,
+		alignItems: "flex-start",
+	},
+	labelText: {
+		color: "#fff",
+		fontSize: 18,
+		fontWeight: "bold",
 	},
 
 	inputContainer: {
@@ -177,7 +244,7 @@ const styles = StyleSheet.create({
 		justifyContent: "center",
 	},
 	focusInput: {
-		borderColor: "green",
+		borderColor: Colors.primary,
 	},
 	exceptFocus: {
 		borderColor: "white",
@@ -208,7 +275,7 @@ const styles = StyleSheet.create({
 		fontSize: 24,
 	},
 	hoverLinkText: {
-		borderBottomColor: "green",
+		borderBottomColor: Colors.primary,
 		borderBottomWidth: 2,
 	},
 });

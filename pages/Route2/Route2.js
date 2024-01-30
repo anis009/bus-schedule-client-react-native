@@ -8,7 +8,7 @@ const Route2 = () => {
 		queryKey: ["schedules"],
 		queryFn: async () => {
 			const response = await fetch(
-				"https://bus-schedule-server.vercel.app/api/schedule/"
+				"https://bus-schedule-server.vercel.app/api/schedule?route=route2"
 			);
 			const scheduleData = await response.json();
 			return scheduleData;
